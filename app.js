@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import store from "./api/models/store.js";
 
 const app = express()
 const port = 5500
@@ -11,8 +12,23 @@ mongoose.connect(mongoURL,{useNewUrlParser: true, useUnifiedTopology:true})
 app.use(express.json({limit: "100mb"}))
 
 app.post("/api/clients",(req,res)=>{
-    console.log("dumy endPoint")
-    res.send("You have posted something")
+    let clientData = req.body
+    let mongoRecord = []
+    clientData.forEach(client => {
+        mongoRecord.push({
+            firstName : client.firstName,
+            phone : client.phone,
+            address : client.address
+        })
+    })
+store.create(mongoRecord,(err, records)=>{
+    if(err){
+        res.status(500).send(err)
+    }
+    else{
+        res.status(200).send(records)
+    }
+})
 })
 
 app.get("/",(req,res )=>{
