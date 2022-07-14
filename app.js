@@ -21,6 +21,7 @@ app.post("/api/clients",(req,res)=>{
             address : client.address
         })
     })
+
 store.create(mongoRecord,(err, records)=>{
     if(err){
         res.status(500).send(err)
@@ -31,10 +32,20 @@ store.create(mongoRecord,(err, records)=>{
 })
 })
 
-app.get("/",(req,res )=>{
-    res.send(
-        "Hello word"
-    )
+app.delete("/api/clients",(req,res)=>{
+    store.deleteMany({},(err)=>{
+        res.status(500).send(err)
+    })
+})
+
+app.get("/api/clients",(req,res )=>{
+    store.find({},(err,docs)=>{
+        if(err){
+            res.status(500).send(err)
+        }else{
+            res.status(200).send(docs)
+        }
+    })
 })
 
 app.listen(port,()=>{
