@@ -1,0 +1,17 @@
+[
+    {
+        "firstName" : "Ariel",
+        "phone" : 1122334455,
+        "address": "calle sin nombre 123"
+    },
+    {
+        "firstName" : "Romi",
+        "phone" : 1166778899,
+        "address": "calle con nombre 3568"
+    },
+    {
+        "firstName" : "Brisa",
+        "phone" : 118888000,
+        "address": "calle gorda 555"
+    }
+]
